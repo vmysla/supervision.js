@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for EngagementAnalyticsModel\lib\eam\src\element\element.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">EngagementAnalyticsModel\lib\eam\src\element\element.js</span></h1>
+    <h2>
+        Statements: <span class="metric">98.46% <small>(64 / 65)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">91.07% <small>(51 / 56)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(18 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(59 / 59)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">EngagementAnalyticsModel/lib/eam/src/element/</a> &#187; element.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">270</span>
+<span class="cline-any cline-yes">270</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">102</span>
+<span class="cline-any cline-yes">102</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">282</span>
+<span class="cline-any cline-yes">282</span>
+<span class="cline-any cline-yes">282</span>
+<span class="cline-any cline-yes">282</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">102</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">282</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">522</span>
+<span class="cline-any cline-yes">522</span>
+<span class="cline-any cline-yes">522</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">804</span>
+<span class="cline-any cline-yes">804</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">522</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js"> /** @namespace EAM.Element **/
+&nbsp;
+ /**
+ * @typedef {Object} Options
+ * @memberof EAM.Element
+ */
+&nbsp;
+ /**
+ * Element
+ * @class
+ * @memberof EAM.Element
+ * @param {EAM.EAM} eam
+ * @param {EAM.Node} node
+ * @param {EAM.Element.Options} options Initial configuration.
+ */
+function Element(eam, node, options){
+&nbsp;
+	/**
+	* @typedef {Object} Model
+	* @memberof EAM.Element.Element
+	* @property {EAM.Element.ElementSelector} selector
+	*/
+&nbsp;
+	/** @type {EAM.Element.ElementSelector} */
+    var selector = eam.create(eam.ElementSelector, node, options);
+&nbsp;
+	 /**
+	  *
+	  * @param getter
+	  * @param isCached
+	  * @param filter
+	  * @returns {Function}
+	  */
+	function customized(getter, isCached, filter){
+		var cachedValue = getter();
+		return function(){
+			if(!isCached || !cachedValue) cachedValue = getter();
+			return filter ? <span class="branch-0 cbranch-no" title="branch not covered" >filter.call(this, cachedValue) </span>: cachedValue;
+		};
+	}
+	/** 
+	* Node
+	*/
+	this.node = node;
+&nbsp;
+	/** 
+	* Get CSS selector of single element without including parent elements.
+	* @returns {String} 
+	*/
+	this.selector = customized(function(){ return selector.tag(); }, true);
+&nbsp;
+	/** 
+	* Get CSS selector path including parent elements.
+	* @returns {String} 
+	*/
+    this.path = customized(function() { return selector.path(); }, true);
+&nbsp;
+	/** 
+	* Get Element ID Attribute
+	* @returns {String} 
+	*/
+	this.id = function(){ return node.id; };
+&nbsp;
+&nbsp;
+&nbsp;
+	/**
+	* @todo document as enum
+	* @typedef {Object} Role
+	* @memberof EAM.Element
+	* @property {String} anchor
+	* @property {String} image
+	* @property {String} heading
+	* @property {String} button
+	* @property {String} field
+	* @property {String} text
+	*/
+&nbsp;
+	/** 
+	* Get Element Role
+	* @returns {EAM.Element.Role}
+	*/
+	this.role = role;	
+&nbsp;
+	/** 
+	* Get Element Tag name. It also includes Type attribute for INPUT elements.
+	* @returns {String}
+	*/
+	this.tag = tag;
+&nbsp;
+&nbsp;
+	 /**
+	 * Get closest node by a given criteria.
+	 * @memberof EAM.Element
+	 * @param {String}       attr    Attribute to test.
+	 * @param {EAM.Values}   values  Values to search.
+	 * @returns {EAM.Element|EAM.none} Node or its closest parent that match given criteria.
+	 */
+	this.closest = function(attr, values){
+		var tested = node;
+		while(tested &amp;&amp; tested != eam.context){
+			var elm = eam.create(eam.Element, tested, options);
+			var attrGetter = elm[attr];
+			var attrValueMatched = eam.getWhenAny(true, attrGetter(), values);
+			if(attrValueMatched) {
+				return elm;
+			}
+			tested = tested.parentNode;
+		}
+	};
+&nbsp;
+	/** 
+	* Get linked Url for Anchor elements
+	* @returns {(EAM.Url)}
+	*/
+	this.anchor = function(){
+		var link = eam.getWhenAny(node.href, role(), 'anchor');
+		return eam.url(link);
+	};
+&nbsp;
+	/** 
+	* Get source Url for Image Elements
+	* @returns {(EAM.Url)}
+	*/
+	this.image = function(){
+		var source = eam.getWhenAny(node.src, tag(), 'img,input:image');
+		return eam.url(source);
+	};
+&nbsp;
+	/** 
+	* Get current value for Field elements
+	* @returns {String}
+	*/
+	this.value = customized(function(){
+		// @todo textarea, select, etc.
+		var nodeTag = tag();
+		return eam.getWhenAny(content() , nodeTag, 'textarea')
+			|| eam.getWhenAny(checked() , nodeTag, 'input:checkbox')
+			|| eam.getWhenAny(node.value, nodeTag, 'input:password') &amp;&amp; <span class="branch-3 cbranch-no" title="branch not covered" >'*****'</span>
+			|| eam.getWhenAny(node.value, role() , 'field');
+	}, false, options.shortValue);
+&nbsp;
+	/** 
+	* Get Element text
+	* @returns {String}
+	*/
+	this.text = function(){
+		var nodeTag = tag();
+		return content()
+			|| eam.getWhenAny(node.title || node.alt, nodeTag, 'a,img,input:image')
+			|| eam.getWhenAny(node.value, nodeTag, 'input:button,input:submit,input:reset');
+	};
+&nbsp;
+	/** 
+	* Get Element Role	
+	* @returns {EAM.Element.Role}
+	*/
+	function role(){
+		var nodeTagName = tagName();
+		var nodeTag     = tag();
+		var nodeRole = (nested() == 'no') ? eam.getWhenAny( 'text', nodeTagName, 'div,li,oi,di,dd,dt') : eam.none;
+		return nodeRole
+			|| eam.getWhenAny( 'anchor' , nodeTag    , 'a')
+			|| eam.getWhenAny( 'image'  , nodeTag    , 'img,input:image')
+			|| eam.getWhenAny( 'button' , nodeTag    , 'button,input:button,input:image,input:reset,input:submit')
+			|| eam.getWhenAny( 'heading', nodeTagName, 'h1,h2,h3,h4,h5,h6')
+			|| eam.getWhenAny( 'field'  , nodeTagName, 'input,textarea,select')
+			|| eam.getWhenAny( 'text'   , nodeTagName, 'span,p,b,i,u,strong,em,addr');
+	}
+&nbsp;
+	/** 
+	* Get nested content for Element
+	* @private
+	* @returns {String}
+	*/
+	function content(){
+		var nodeTag  = tag();
+		var nodeRole = role();
+		var allowed = false
+			     || eam.getWhenAny(true, nodeRole, 'text,anchor,field,button,image,heading') 
+			     || eam.getWhenAny(true, nodeTag, 'label');
+		var nodeContent = allowed ? node.innerText.replace(/[\s\t\r\n]+/ig,' ') : '';
+		if(nodeContent != '' &amp;&amp; nodeContent != ' ') return nodeContent;
+	}
+&nbsp;
+	/**
+	* @todo documment as enum
+	* @typedef {Object} Checked
+	* @memberof EAM.Element
+	* @property {String} checked
+	* @property {String} unchecked
+	*/
+&nbsp;
+	/** 
+	* Get string value of checked attribute for Checkbox Fields
+	* @private
+	* @returns {EAM.Element.Checked}
+	*/
+	function checked(){
+		<span class="missing-if-branch" title="if path not taken" >I</span>if(node.checked != eam.none) <span class="cstat-no" title="statement not covered" >return node.checked ? 'checked' : 'unchecked';</span>
+	}
+&nbsp;
+	/** 
+	* Indicates if Element is used as container for other Elements.
+	* @private
+	* @returns {String}
+	*/
+	function nested(){
+		return (!node.children || node.children.length == 0) ? 'no' : 'yes';
+	}
+&nbsp;
+	/** 
+	* Get Element Tag name. It also includes Type attribute for INPUT elements.
+	* @private
+	* @returns {String}
+	*/
+	function tag(){
+		var nodeTagName = tagName();
+		var nodeTagType = tagType() || 'text';
+		return (nodeTagName == 'input') ? (nodeTagName + ':' + nodeTagType) : nodeTagName;
+	}
+&nbsp;
+	/** 
+	* Get Tag Name for Element
+	* @private
+	* @returns {String}
+	*/
+	function tagName(){
+		var nodeName = node.localName || node.tagName;
+		return nodeName &amp;&amp; nodeName.toLowerCase();
+	}
+&nbsp;
+	/** 
+	* Get value of Type attribute for Element
+	* @private
+	* @returns {String}
+	*/
+	function tagType(){
+		return node.type &amp;&amp; node.type.toLowerCase();
+	}
+}
+&nbsp;
+module.exports = Element;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri May 08 2015 02:38:04 GMT+0300 (FLE Daylight Time)</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

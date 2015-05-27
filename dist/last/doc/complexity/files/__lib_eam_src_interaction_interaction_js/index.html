@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - ./lib/eam/src/interaction/interaction.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>./lib/eam/src/interaction/interaction.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">63.55</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">200</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">43.58</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.19</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/** @namespace EAM.Interaction **/
+
+/**
+ * @typedef {Object} Options
+ * @memberof EAM.Interaction
+ */
+
+/**
+ * EAM Interaction.
+ * @class
+ * @memberof EAM.Interaction
+ * @param {EAM.Eam} eam
+ * @param {EAM.Interaction.Options} options Initial configuration.
+ */
+function Interaction(eam, options) {
+
+    /** @const {EAM.Time} EVENT_FIXATION_TIME */
+    var EVENT_FIXATION_TIME = options.fixation * 1000;
+
+    var last = eam.none;
+    var current = eam.none;
+
+    this.current = function () {
+        return current;
+    };
+
+//same as i19n for internationalization or l10n for localization – that&#039;s a shortening for &quot;interaction&quot; - &quot;i&quot; + 9 letters + &quot;n&quot;.
+
+    /**
+     * @typedef {Object} Model Complex object that describes interaction.
+     * @property {EAM.Time}             started    Time when interaction was started or eam.none for interactions in event fixation mode.
+     * @property {EAM.Time}             created    Time when 1st event for this interaction was created.
+     * @property {EAM.Dwell}            dwell      Dwell time for current element interaction.
+     * @property {EAM.Element.Element}  initiator  Target Element from 1st event for this interaction.
+     * @property {EAM.Element.Element}  receiver   Closest Element that can receive focus, is actionable or has busness value.
+     * @memberof EAM.Interaction
+     */
+
+    /**
+     * Creates a new Interaction Model for a given event.
+     * @param {Node}     node           Target Node for event
+     * @param {EAM.Time} eventCreated   Time when event was created.
+     * @param {Boolean}  isFixationMode Flag that indicates if interaction should be started in fixation mode.
+     * @returns {EAM.Interaction.Model} New interaction
+     */
+    function start(node, eventCreated, isFixationMode) {
+
+        var element = eam.create(eam.Element, node, options.element);
+
+        var interaction = {
+            started: isFixationMode ? eam.none : eventCreated,
+            created: eventCreated,
+            dwell: eam.create(eam.Dwell, options.element.dwell),
+            initiator: element,
+            receiver: element.closest(&#039;role&#039;, &#039;anchor,button,field,heading&#039;) || element
+        };
+
+        return interaction;
+    }
+
+    /**
+     * Prepares Interaction Model for reporting and initiates reporting process.
+     * @param {EAM.Interaction.Model}   i9n Interaction to complete
+     */
+    function complete(i9n) {
+        i9n.dwell.pause();
+        if (last &amp;&amp; i9n.initiator.node == last.initiator.node) {
+            last.dwell.overtime(i9n.dwell.total());
+        } else {
+            reportLast();
+            last = i9n;
+            eam.timeout(reportLast, EVENT_FIXATION_TIME);
+        }
+    }
+
+    /**
+     * Reports last completed interaction
+     * @param {EAM.Interaction.Model}   i9n Interaction to complete
+     */
+    function reportLast() {
+        if (last == eam.none) return;
+        //console.log(&#039;event reported&#039;, last.initiator.tag()+&#039;/&#039;+ last.receiver.tag() );
+        eam.events.push({
+            type: &#039;event&#039;,
+            category: &#039;element&#039;,
+            action: &#039;interaction&#039;,
+            data: last
+        });
+        last = eam.none;
+    }
+
+    /**
+     * Swaps Elements for two interactions and completes first of them.
+     * Used for resolving event bubbling issue when events are received in wrong order (older events with lower event.simeStamp received after more recent events).
+     * @param {EAM.Interaction.Model}   prematureInteraction Interation for event which was received earlier than should.
+     * @param {EAM.Interaction.Model}   bubbledInteraction   Interation for delayed event which was received later than should.
+     */
+    function swapAndComplete(prematureInteraction, bubbledInteraction) {
+
+        var prematureElements = {
+            initiator: prematureInteraction.initiator,
+            receiver: prematureInteraction.receiver
+        };
+        var bubbledElements = {
+            initiator: bubbledInteraction.initiator,
+            receiver: bubbledInteraction.receiver
+        };
+
+        eam.$.extend(prematureInteraction, bubbledElements);
+        eam.$.extend(bubbledInteraction, prematureElements);
+        complete(prematureInteraction);
+
+
+        return bubbledInteraction;
+    }
+
+    /**
+     * Decides if Event indicates current or new Interaction that should be created.
+     * Used for resolving event bubbling issue when events are received in wrong order (older events with lower event.simeStamp received after more recent events).
+     * @param {EAM.Interaction.Model}  i9n            Interaction to update
+     * @param {Node}                   node           Target Node for event
+     * @param {EAM.Time}               eventCreated   Time when event was created.
+     * @param {DOMEvent}               event          Event.
+     * @returns {EAM.Interaction.Model} Current interaction
+     */
+    function update(i9n, node, eventCreated, event) {
+        var current = i9n;
+        var isNewEvent = (eventCreated - current.created) &gt; EVENT_FIXATION_TIME;
+        var isBubbledEvent = eventCreated &lt; current.created;
+        var isCurrent = (node == current.initiator.node || node == current.receiver.node);
+        var isLast = last &amp;&amp; (node == last.initiator.node || node == last.receiver.node);
+
+        //var action = &#039;none&#039;;
+
+        if (!isCurrent) {
+            if (isNewEvent) {
+                complete(current);
+                current = start(node, eventCreated);
+                //action = &#039;started/compl/start&#039;;
+            } else if (isBubbledEvent) {
+                var bubbledInteraction = start(node, eventCreated);
+                current = swapAndComplete(current, bubbledInteraction);
+                //action = &#039;swap&#039;;
+            } else {
+                if (current.started) {
+                    complete(current);
+                    current = start(node, eventCreated, true);
+                    //action = &#039;fixation/compl/start&#039;;
+                } else if (!isLast) {
+                    //action = &#039;update/rec&#039;;
+                    var element = eam.create(eam.Element, node, options.element);
+                    current.receiver = element.closest(&#039;role&#039;, &#039;anchor,button,field,heading&#039;) || element;
+                    current.started = eventCreated;
+                }
+            }
+        }
+        /*
+         console.log(
+         &#039;event&#039;, event.type+&#039;/&#039;+node.tagName,
+         &#039;action&#039;, action,
+         &#039;delay&#039;, eventCreated - current.created,
+         &#039;new&#039;, isNewEvent,
+         &#039;bubbled&#039;, isBubbledEvent,
+         &#039;current&#039;, isCurrent,
+         &#039;last&#039;, isLast);
+         */
+        return current;
+    }
+
+
+    /**
+     * Register listeners by a given options.
+     * @private
+     * @param {EAM.Options.Listen} listenOptions Events to listen.
+     * @param {Function}           handler       Event handler.
+     */
+    function listen(listenOptions, handler) {
+        eam.listen(eam.global, listenOptions.global, [handler]);
+        eam.listen(eam.context, listenOptions.context, [handler]);
+    }
+
+
+    listen(
+        options.element.dwell.listen,
+        function (event) {
+            if (current == eam.none) return;
+            var isGlobal = (event.target == eam.global);
+            var isDeactivation = (event.type == &#039;blur&#039;);
+            return (isGlobal &amp;&amp; isDeactivation)
+                ? current.dwell.pause()
+                : current.dwell.startOrProlong();
+        });
+
+    listen(
+        options.listen,
+        function (event) {
+            var target = event.target;
+            if (target == eam.global) {
+                if (current &amp;&amp; event.type == &#039;unload&#039;) {
+                    current = complete(current);
+                    reportLast();
+                }
+            } else if (target != eam.none &amp;&amp; target != eam.context) {
+                var timeStamp = event.timeStamp || eam.time();
+                current = (current == eam.none)
+                    ? start(target, timeStamp)
+                    : update(current, target, timeStamp, event);
+            }
+        });
+
+
+}
+
+module.exports = Interaction;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

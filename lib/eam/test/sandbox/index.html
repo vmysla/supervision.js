@@ -1,0 +1,376 @@
+<!--
+	* some events might be reported later, use timestamp for timing
+    * timeStamp for first and last grouped events have <100ms delay
+    * event with min timeStamp in a group - user action target
+    * event with max timeStamp in a group - resulting target
+    * first mousedown event is fiered because of user action
+    * link#href might be pointed on real element $(document.location.hash)
+    * jquery and native event listeners fire in a same order
+    * clicks on disabled elements doesn't happen (jquery, label#for, etc.)
+
+-->
+<script type="text/javascript" src="../../../../node_modules/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="../../../../node_modules/ja-satellite-extensions/lib/satellite.js"></script>
+<script type="text/javascript" src="../../../../dist/last/eam.debug.js"></script>
+<script type="text/javascript" src="visual-interactions.js"></script>
+
+<script type="text/javascript">
+
+	// Config:
+
+	var use_satelite_bind						= true; // false - jquery
+	var log_doc_clicks_only						= false;
+	var log_doc_clicks_mousedown_keypress_only	= true;
+	var disabled_elements						= 'a[href="#link"]';	
+
+</script>
+
+<a href="#link" onclick="log2('short','onclick', 'a', 'link');">
+	link
+	<img src="http://www.justanswer.com/components/ja--abu--footer/images/social/twitter.png"
+	 onclick="log2('short','onclick', 'img', 'image inside link');">
+</a>
+<hr/>
+<a href="#link-clicks-on-input" 
+   onclick="log2('short','onclick', 'a', 'link clicks on input');$('#input').click();">
+	link clicks on input
+	<img src="http://www.justanswer.com/components/ja--abu--footer/images/social/twitter.png"
+	 onclick="log2('short','onclick', 'img','image inside link that clicks on input');">
+</a>
+<hr/>
+<a href="#image-clicks-on-input" 
+   onclick="log2('short','onclick', 'a', 'image inside link clicks on input');">
+	image clicks on input
+	<img src="http://www.justanswer.com/components/ja--abu--footer/images/social/twitter.png"
+	 onclick="log2('short','onclick', 'img', 'image inside link clicks on input');$('#input').click();">
+</a>
+<hr/>
+
+<a href="#link-clicks-on-label" 
+   onclick="log2('short','onclick', 'a', 'link clicks on label');$('#label').click();">
+	link clicks on label
+	<img src="http://www.justanswer.com/components/ja--abu--footer/images/social/twitter.png"
+	 onclick="log2('short','onclick', 'img','image inside link that clicks on label');">
+</a>
+<hr/>
+
+
+<a href="#link-jquery-handler-clicks-on-label" 
+   onclick="log2('short','onclick', 'a', 'link with jquery click handler that clicks on label');">
+	link with jquery click handler that clicks on label
+	<img src="http://www.justanswer.com/components/ja--abu--footer/images/social/twitter.png"
+	 onclick="log2('short','onclick', 'img','image inside link with jquery click handler that clicks on label');">
+</a>
+<script type="text/javascript">
+	$('[href="#link-jquery-handler-clicks-on-label"]').click(function (){
+		$('#label').click();
+	});
+</script>
+<hr/>
+
+<a href="#image-clicks-on-label" 
+   onclick="log2('short','onclick', 'a', 'image inside link clicks on label');">
+	image clicks on label
+	<img src="http://www.justanswer.com/components/ja--abu--footer/images/social/twitter.png"
+	 onclick="log2('short','onclick', 'img', 'image inside link clicks on label');$('#label').click();">
+</a>
+<hr/>
+
+<a href="#label" 
+   onclick="log2('short','onclick', 'a', 'link href for label');">
+	link href for label
+	<img src="http://www.justanswer.com/components/ja--abu--footer/images/social/twitter.png"
+	 onclick="log2('short','onclick', 'img','image inside link href for label');">
+</a>
+<hr/>
+
+
+<label id="label" for="input"
+		onclick="log2('short','onclick', 'label', 'label for input');">
+		label for input
+</label>
+
+<input id="input" onclick="log2('short','onclick', 'input', 'normal');">
+<hr/>
+<script>
+
+	function selector($,node) {
+
+		//todo: rewrite
+	    var $node = $(node), path;
+	   // console.log($,node);
+	    while ($node.length) {
+	        var realNode = $node[0], 
+	        	name = realNode.localName || realNode.tagName;
+	        if (!name) break;
+	        name = name.toLowerCase();
+	        if (name=='input' && realNode.type) {
+	        	name += '[type="'+realNode.type+'"]';
+	        }if (realNode.id) {
+	            var name = name + '#' + realNode.id;
+	            name = name + (path ? '>' + path : '');
+	            return name;
+	        } else if (realNode.name) {
+	            name += '[name="'+realNode.name+'"]';
+	        }else if (realNode.className) {
+	            name += '.' + [].slice.call(realNode.classList).join('.');
+	        }
+	        var $parent = $node.parent(), $siblings = $parent.children(name);
+	        if ($siblings.length > 1) name += ':eq(' + $siblings.index($node) + ')';
+	        path = name + (path ? '>' + path : '');
+	        $node = $parent;
+	    }
+	    //if(path==window.undefined) throw new Error('Element Path is undefined');
+	    return path;
+	}
+
+ 	function listen(context, events, listener){
+		var $context = jQuery(context),
+			names = events.split(',');
+
+		for(var i=0; i<names.length; i++){
+			if(use_satelite_bind){
+				_satellite.addEventHandler(context, names[i], listener);
+			}else{
+				$context.bind(names[i], listener);		
+			}
+			
+		}
+	}
+
+
+
+	var dump_events = [];
+	var dump_clicked = null;
+	var first_event_timestamp = 0;
+	var first_click_timestamp = 0;
+	var last_oldest_event = { timeStamp : 0, tagName : ''};
+
+	function log2(short, handler, tag, details){
+		console.log(short, handler, tag, details);
+		var clicked = [handler, tag, details].join(',');
+		if(!log_doc_clicks_only) dump_events.push(clicked);
+		if(!dump_clicked) dump_clicked = clicked;
+	}
+
+	function log(e){
+		events = true;
+		var can_log = true;
+		if(log_doc_clicks_mousedown_keypress_only 
+			&& (e.type!='click' && e.type!='mousedown' && e.type!='keypress') 
+		) can_log = false;
+							
+		if(log_doc_clicks_only && e.type!='click') can_log = false;
+
+		if(can_log) {
+
+
+		 if(first_click_timestamp==0 && e.type=='click') first_click_timestamp = e.timeStamp;
+		 if(first_event_timestamp ==0){
+		 	//first event
+		 	first_event_timestamp = e.timeStamp;
+		 	last_oldest_event = { timeStamp : e.timeStamp, tagName : e.target.tagName }
+		 }
+		 var olderEvent = e.timeStamp >= last_oldest_event.timeStamp;
+		 var delay = e.timeStamp - last_oldest_event.timeStamp;
+		  console.log('short',e.type, selector(jQuery,e.target), e.timeStamp );
+		  console.log('full',e );
+		  dump_events.push([e.type,selector(jQuery,e.target),
+		 	olderEvent ? 'next ' : 'delayed '+delay,
+		 	'-1st '+(e.timeStamp-first_event_timestamp),
+		 	'-1st-click '+(e.timeStamp-first_click_timestamp),
+		 	].join(','));
+		  if(olderEvent){
+		  	last_oldest_event = { timeStamp : e.timeStamp, tagName : e.target.tagName }
+		  }
+		}
+		window.setTimeout(function(){
+			if(!dump_events.length) return;
+			console.log('short','------');
+			$('#dumps')[0].innerHTML += ('='+dump_clicked+'\r\n');
+			$('#dumps')[0].innerHTML += (''+dump_events.join('\r\n')+'\r\n');
+			$('#dumps')[0].innerHTML += ('--------------------\r\n');	
+			dump_events = [];
+			dump_clicked = null;
+			first_event_timestamp = 0;
+			first_click_timestamp = 0;
+		}, 2000);		
+	}
+
+
+	jQuery(disabled_elements).attr('disabled','disabled');
+	listen(document, 'click,mousedown',log);
+	listen(document, 'keypress',log);
+	listen(document, 'focusin,focusout,mouseup,keydown,keyup',log);
+	//listen(document, 'mousemove',log);
+	listen(window,   'focus,blur',log);
+	//listen(window,   'resize,scroll',log);
+	//listen(window,   'unload', log);
+
+
+</script>
+<textarea id="dumps" style="width: 100%;height: 100%;"></textarea>
+
+<!--
+
+=onclick,input,normal
+keyup,html>body
+mousedown,input[type="text"]#input
+focusin,input[type="text"]#input
+mouseup,input[type="text"]#input
+onclick,input,normal
+click,input[type="text"]#input
+--------------------
+=onclick,a,link
+mousedown,html>body>a:eq(0)
+focusout,input[type="text"]#input
+focusin,html>body>a:eq(0)
+mouseup,html>body>a:eq(0)
+onclick,a,link
+click,html>body>a:eq(0)
+--------------------
+=onclick,img,image inside link
+mousedown,html>body>a:eq(0)>img
+mouseup,html>body>a:eq(0)>img
+onclick,img,image inside link
+onclick,a,link
+click,html>body>a:eq(0)>img
+--------------------
+=onclick,a,link clicks on input
+mousedown,html>body>a:eq(1)
+focusout,html>body>a:eq(0)
+focusin,html>body>a:eq(1)
+mouseup,html>body>a:eq(1)
+onclick,a,link clicks on input
+onclick,input,normal
+click,input[type="text"]#input -- reported earlier but with older timestamp
+click,html>body>a:eq(1)
+--------------------
+=null
+keyup,html>body
+--------------------
+=onclick,img,image inside link that clicks on input
+mousedown,html>body>a:eq(1)>img
+focusin,html>body>a:eq(1)
+mouseup,html>body>a:eq(1)>img
+onclick,img,image inside link that clicks on input
+onclick,a,link clicks on input
+onclick,input,normal
+click,input[type="text"]#input -- reported earlier but with older timestamp
+click,html>body>a:eq(1)>img
+--------------------
+
+
+
+
+=onclick,a,link clicks on input
+mousedown,html>body>a:eq(1)
+focusin,html>body>a:eq(1)
+mouseup,html>body>a:eq(1)
+onclick,a,link clicks on input
+onclick,input,normal
+click,input[type="text"]#input
+click,html>body>a:eq(1)
+--------------------
+=onclick,img,image inside link that clicks on input
+mousedown,html>body>a:eq(1)>img
+mouseup,html>body>a:eq(1)>img
+onclick,img,image inside link that clicks on input
+onclick,a,link clicks on input  -- a receives event
+onclick,input,normal
+click,input[type="text"]#input
+click,html>body>a:eq(1)>img
+--------------------
+
+
+
+
+--------------------
+=onclick,label,label for input
+mousedown,label#label
+mouseup,label#label
+onclick,label,label for input
+click,label#label
+focusin,input[type="text"]#input
+onclick,input,normal
+click,input[type="text"]#input
+
+--------------------
+=onclick,a,link clicks on label
+mousedown,html>body>a:eq(3)
+focusin,html>body>a:eq(3)
+mouseup,html>body>a:eq(3)
+onclick,a,link clicks on label
+onclick,label,label for input
+click,label#label
+focusout,html>body>a:eq(3)
+focusin,input[type="text"]#input
+onclick,input,normal
+click,html>body>a:eq(3)
+--------------------
+=onclick,img,image inside link that clicks on label
+mousedown,html>body>a:eq(3)>img
+focusin,html>body>a:eq(3)
+mouseup,html>body>a:eq(3)>img
+onclick,img,image inside link that clicks on label
+onclick,a,link clicks on label
+onclick,label,label for input
+click,label#label
+focusout,html>body>a:eq(3)
+focusin,input[type="text"]#input
+onclick,input,normal
+click,html>body>a:eq(3)>img
+--------------------
+
+
+=null
+keyup,html>body
+--------------------
+=onclick,img,image inside link clicks on label
+mousedown,html>body>a:eq(4)>img
+focusin,html>body>a:eq(4)
+mouseup,html>body>a:eq(4)>img
+onclick,img,image inside link clicks on label
+onclick,label,label for input
+click,label#label
+focusout,html>body>a:eq(4)
+focusin,input[type="text"]#input
+onclick,input,normal
+onclick,a,image inside link clicks on label
+click,html>body>a:eq(4)>img
+--------------------
+
+=onclick,img,image inside link clicks on label
+click,label#label,next,0,LABEL
+click,input[type="text"]#input,next,21,LABEL
+click,html>body>a:eq(4)>img,delayed,-55,INPUT
+--------------------
+=onclick,a,image inside link clicks on label
+click,html>body>a:eq(4),next,0,A
+--------------------
+=onclick,img,image inside link that clicks on label
+click,label#label,next,0,LABEL
+click,input[type="text"]#input,next,11,LABEL
+click,html>body>a:eq(3)>img,delayed,-18,INPUT
+--------------------
+=onclick,a,link clicks on label
+click,label#label,next,0,LABEL
+click,input[type="text"]#input,next,11,LABEL
+click,html>body>a:eq(3),delayed,-12,INPUT
+--------------------
+
+
+=onclick,img,image inside link href for label
+click,html>body>a:eq(5)>img,next,0,IMG
+--------------------
+=onclick,a,link href for label
+click,html>body>a:eq(5),next,0,A
+--------------------
+
+=onclick,img,image inside link with jquery click handler that clicks on label
+click,label#label,next,0,LABEL
+click,input[type="text"]#input,next,21,LABEL
+click,html>body>a:eq(4)>img,delayed,-74,INPUT
+--------------------
+
+-->

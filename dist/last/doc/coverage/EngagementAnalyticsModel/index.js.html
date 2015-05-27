@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for EngagementAnalyticsModel\index.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../prettify.css">
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">EngagementAnalyticsModel\index.js</span></h1>
+    <h2>
+        Statements: <span class="metric">85.71% <small>(18 / 21)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">16.67% <small>(1 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">90% <small>(18 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">EngagementAnalyticsModel/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var EAM = require('./lib/eam/src/eam.js');
+var eam = EAM.prototype;
+&nbsp;
+eam.Helper = require('./lib/eam/src/helper/helper.js');
+eam.HelperJQuery = require('./lib/eam/src/helper/helper-jquery.js');
+eam.HelperSatellite = require('./lib/eam/src/helper/helper-satellite.js');
+&nbsp;
+eam.Dwell = require('./lib/eam/src/dwell/dwell.js');
+eam.DwellTimer = require('./lib/eam/src/dwell/dwell-timer.js');
+&nbsp;
+eam.Element = require('./lib/eam/src/element/element.js');
+eam.ElementSelector = require('./lib/eam/src/element/element-selector.js');
+&nbsp;
+eam.Interaction = require('./lib/eam/src/interaction/interaction.js');
+&nbsp;
+eam.Tracker = require('./lib/eam/src/tracker/tracker.js');
+&nbsp;
+EAM.options = {
+&nbsp;
+	autostart : true,
+&nbsp;
+	global    : window,
+	context   : document,
+	none      : EAM.none,
+	nan		  : Number.NaN,
+	doNothing : <span class="fstat-no" title="function not covered" >function (){</span>},
+&nbsp;
+	helper  : { 
+		priority  : [ eam.HelperSatellite, eam.HelperJQuery ]
+	},
+&nbsp;
+	interaction : {
+&nbsp;
+		/**
+		* 
+		* User action might start a sequence of events with different target Nodes.
+		* This happens because browser can bubble and forward events. JavaScript too.
+		* Therefore we might receive a group of events and should select one for reporting.
+		* Initiator - target element from first event when interaction starts.
+		* Receiver  - one of target elements of the rest events received later.
+		* Fixation  - maximal allowed time period in seconds for interaction receiver change.
+		*             After this time, received events with a different target 
+		*             should be classified as first event of a new interaction.
+		*/
+		fixation : 0.3,
+&nbsp;
+		listen : { 
+				global  : 'unload',
+				context : 'click,mousedown,keypress'
+		},
+&nbsp;
+		element : {
+&nbsp;
+			shortValue : <span class="fstat-no" title="function not covered" >function(text){</span>
+<span class="cstat-no" title="statement not covered" >				if(!text) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >				return (text.length&lt;3) ? text : text.substr(0,3)+'...';	</span>
+			},
+&nbsp;
+			dwell : { 
+&nbsp;
+				autostart : true, 
+				latency   : 0,
+&nbsp;
+				listen : { 
+					global  : 'focus,blur',
+					context : 'focusin,focusout,mousedown,mouseup,click,keydown,keyup,keypress'
+				}
+			}
+		}
+&nbsp;
+	}
+}
+&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>if(EAM.options.autostart){
+	var instance = new EAM(EAM.options);
+	EAM.options.global['eam'] = instance;
+	instance['interaction'] = instance.create(eam.Interaction, EAM.options.interaction);
+	instance['tracker'] = instance.create(eam.Tracker, EAM.options);
+}
+&nbsp;
+module.exports = EAM;
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri May 08 2015 02:38:04 GMT+0300 (FLE Daylight Time)</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

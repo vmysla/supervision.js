@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for EngagementAnalyticsModel\lib\eam\src\element\element-selector.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">EngagementAnalyticsModel\lib\eam\src\element\element-selector.js</span></h1>
+    <h2>
+        Statements: <span class="metric">84.21% <small>(32 / 38)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">83.33% <small>(25 / 30)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(4 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">90.32% <small>(28 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">EngagementAnalyticsModel/lib/eam/src/element/</a> &#187; element-selector.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">180</span>
+<span class="cline-any cline-yes">180</span>
+<span class="cline-any cline-yes">282</span>
+<span class="cline-any cline-yes">282</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-yes">168</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">192</span>
+<span class="cline-any cline-yes">102</span>
+<span class="cline-any cline-yes">102</span>
+<span class="cline-any cline-yes">102</span>
+<span class="cline-any cline-yes">102</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js"> /**
+ * Element
+ * @private
+ * @class
+ * @memberof EAM.Element
+ * @param {EAM.Eam} eam
+ * @param {EAM.Node} node
+ * @param {EAM.Element.Options} options Initial configuration.
+ */
+function ElementSelector(eam, node){
+&nbsp;
+	/** 
+	* Get CSS selector path
+	* @returns {String} 
+	*/
+    this.path = function () { return selector(false); };
+&nbsp;
+	/** 
+	* Get CSS selector
+	* @returns {String} 
+	* @todo should we use? if( node.disabled == true ) selector +=':disabled';
+	* @todo should we use? if( $(node).css('opacity') != 1) selector +=':opacity';
+	*/
+	this.tag = function () { return selector(true); };
+&nbsp;
+	/**
+     * Get CSS Path
+     * @private
+     * @param last Node
+     * @returns {String}
+     * @todo rewrite
+     */
+	function selector(last) {
+	    var $node = eam.$(node), path;
+	    while ($node.length) {
+	        var realNode = $node[0];
+	        if (realNode == eam.context) break;
+&nbsp;
+	        var isIdentified = false;
+	        var name = realNode.localName || realNode.tagName;
+	        <span class="missing-if-branch" title="if path not taken" >I</span>if (!name) <span class="cstat-no" title="statement not covered" >break;</span>
+	        name = name.toLowerCase();
+	        if (name=='input' &amp;&amp; realNode.type) {
+	        	name += '[type="'+realNode.type+'"]';
+	        }
+	        if (realNode.id) {
+	            name += '#' + realNode.id;
+	            isIdentified = true;
+	        } 
+	        <span class="missing-if-branch" title="if path not taken" >I</span>if ( (!last || !isIdentified) &amp;&amp; realNode.name) {
+<span class="cstat-no" title="statement not covered" >	            name += '[name="'+realNode.name+'"]';</span>
+<span class="cstat-no" title="statement not covered" >	            isIdentified = true;</span>
+	        }
+	        var classes=realNode.className.replace(/\s+/g,'.');
+	        <span class="missing-if-branch" title="if path not taken" >I</span>if ( (!last || !isIdentified) &amp;&amp; classes) {
+<span class="cstat-no" title="statement not covered" >	        	name += '.' + classes;</span>
+	        }
+	        if(last) return name;
+	        var $parent = $node.parent(), $siblings = $parent.children(name);
+	        <span class="missing-if-branch" title="if path not taken" >I</span>if ($siblings.length &gt; 1) <span class="cstat-no" title="statement not covered" >name += ':eq(' + $siblings.index($node) + ')';</span>
+	        path = name + (path ? '&gt;' + path : '');
+	        $node = $parent;
+	    }
+	    <span class="missing-if-branch" title="if path not taken" >I</span>if(!path) <span class="cstat-no" title="statement not covered" >return '(unknown)';</span>
+	    return path;
+	}
+}
+&nbsp;
+module.exports = ElementSelector;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri May 08 2015 02:38:04 GMT+0300 (FLE Daylight Time)</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

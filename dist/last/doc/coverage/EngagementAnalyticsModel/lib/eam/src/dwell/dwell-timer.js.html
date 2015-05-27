@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for EngagementAnalyticsModel\lib\eam\src\dwell\dwell-timer.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">EngagementAnalyticsModel\lib\eam\src\dwell\dwell-timer.js</span></h1>
+    <h2>
+        Statements: <span class="metric">90.48% <small>(19 / 21)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">83.33% <small>(5 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">90% <small>(18 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">EngagementAnalyticsModel/lib/eam/src/dwell/</a> &#187; dwell-timer.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">202</span>
+<span class="cline-any cline-yes">202</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">334</span>
+<span class="cline-any cline-yes">195</span>
+<span class="cline-any cline-yes">195</span>
+<span class="cline-any cline-yes">195</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js"> /**
+ * Dwell Timer
+ * @private
+ * @class
+ * @memberof EAM.Dwell
+ * @param {EAM.Eam} eam
+ * @param {EAM.Dwell.Options} options Initial configuration.
+ */
+function DwellTimer(eam, options){
+&nbsp;
+	/** @const {EAM.Time} FLAG_TIMER_IS_STOPPED */
+	var FLAG_TIMER_IS_STOPPED = eam.nan;
+&nbsp;
+	/**
+	* @typedef {Object} Model
+	* @memberof EAM.Dwell.DwellTimer
+	* @property {EAM.Duration}       saved   Saved activity duration in seconds.
+	* @property {(EAM.Time)} started Time of the last activity or False when none.
+	*/
+&nbsp;
+	/** 
+	 * @private	
+	 * @property {EAM.Dwell.DwellTimer.Model} model
+	 */
+	var model = {
+		savedSeconds : 0,
+		startTime    : FLAG_TIMER_IS_STOPPED
+	}
+&nbsp;
+	/** Reset dwell time */	
+	this.reset = <span class="fstat-no" title="function not covered" >function(){ </span>
+<span class="cstat-no" title="statement not covered" >		model.savedSeconds = 0;</span>
+<span class="cstat-no" title="statement not covered" >		model.startTime = FLAG_TIMER_IS_STOPPED;</span>
+	}
+&nbsp;
+	/** 
+	 * Get total dwell time.
+	 * @method
+     * @returns {EAM.Duration} Duration in seconds.
+     */	
+	this.total = function(){ 
+		return saved() + unsaved(); 
+	};
+&nbsp;
+	/**
+     * Save current dwell session and restart if required.
+     * @method
+     * @param {Boolean} restart Indicates if new dwell session should be started after save.
+     */
+	this.flush = function(restart){
+		model.savedSeconds  += unsaved();
+		model.startTime = restart ? eam.time() : FLAG_TIMER_IS_STOPPED;
+	};
+&nbsp;
+	/**
+     * Get dwell time for saved sessions.
+     * @private
+     * @returns {EAM.Duration} Duration in seconds.
+     */
+	function saved(){
+		return model.savedSeconds;
+	}
+&nbsp;
+	/**
+     * Get dwell time for unsaved session.
+     * @private
+     * @returns {EAM.Duration} Duration in seconds.
+     */
+	function unsaved(){
+		if(model.startTime == FLAG_TIMER_IS_STOPPED) return 0;
+		var now   = eam.time();
+		var delta = (now - model.startTime) / 1000;
+		return (delta &lt;= options.latency) ? delta : options.latency + 1;
+	}
+&nbsp;
+	this.flush(options.autostart);
+}
+&nbsp;
+module.exports = DwellTimer;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri May 08 2015 02:38:04 GMT+0300 (FLE Daylight Time)</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

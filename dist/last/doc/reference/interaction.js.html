@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Engagement Analytics Model Source: lib/eam/src/interaction/interaction.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	
+	<link type="text/css" rel="stylesheet" href="styles/site.spacelab.css">
+	
+</head>
+
+<body>
+<div class="container-fluid">
+	<div class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<a class="brand" href="index.html">Engagement Analytics Model</a>
+			<ul class="nav">
+				
+				<li class="dropdown">
+					<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="EAM.html">EAM</a>
+						</li>
+						
+						<li>
+							<a href="EAM.Dwell.html">Dwell</a>
+						</li>
+						
+						<li>
+							<a href="EAM.Element.html">Element</a>
+						</li>
+						
+						<li>
+							<a href="EAM.Helper.html">Helper</a>
+						</li>
+						
+						<li>
+							<a href="EAM.Interaction.html">Interaction</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
+				<li class="dropdown">
+					<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="EAM.Dwell.Dwell.html">Dwell</a>
+						</li>
+						
+						<li>
+							<a href="EAM.EAM.html">EAM</a>
+						</li>
+						
+						<li>
+							<a href="EAM.Element.Element.html">Element</a>
+						</li>
+						
+						<li>
+							<a href="EAM.Helper.Helper.html">Helper</a>
+						</li>
+						
+						<li>
+							<a href="EAM.Interaction.Interaction.html">Interaction</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+
+		
+			<div class="span12">
+				
+				<div id="main">
+					
+
+
+		<h1 class="page-title">Source: lib/eam/src/interaction/interaction.js</h1>
+    
+    <section>
+        <article>
+            <pre class="sunlight-highlight-javascript linenums">/** @namespace EAM.Interaction **/
+
+/**
+ * @typedef {Object} Options
+ * @memberof EAM.Interaction
+ */
+
+/**
+ * EAM Interaction.
+ * @class
+ * @memberof EAM.Interaction
+ * @param {EAM.Eam} eam
+ * @param {EAM.Interaction.Options} options Initial configuration.
+ */
+function Interaction(eam, options) {
+
+    /** @const {EAM.Time} EVENT_FIXATION_TIME */
+    var EVENT_FIXATION_TIME = options.fixation * 1000;
+
+    var last = eam.none;
+    var current = eam.none;
+
+    this.current = function () {
+        return current;
+    };
+
+//same as i19n for internationalization or l10n for localization – that's a shortening for "interaction" - "i" + 9 letters + "n".
+
+    /**
+     * @typedef {Object} Model Complex object that describes interaction.
+     * @property {EAM.Time}             started    Time when interaction was started or eam.none for interactions in event fixation mode.
+     * @property {EAM.Time}             created    Time when 1st event for this interaction was created.
+     * @property {EAM.Dwell}            dwell      Dwell time for current element interaction.
+     * @property {EAM.Element.Element}  initiator  Target Element from 1st event for this interaction.
+     * @property {EAM.Element.Element}  receiver   Closest Element that can receive focus, is actionable or has busness value.
+     * @memberof EAM.Interaction
+     */
+
+    /**
+     * Creates a new Interaction Model for a given event.
+     * @param {Node}     node           Target Node for event
+     * @param {EAM.Time} eventCreated   Time when event was created.
+     * @param {Boolean}  isFixationMode Flag that indicates if interaction should be started in fixation mode.
+     * @returns {EAM.Interaction.Model} New interaction
+     */
+    function start(node, eventCreated, isFixationMode) {
+
+        var element = eam.create(eam.Element, node, options.element);
+
+        var interaction = {
+            started: isFixationMode ? eam.none : eventCreated,
+            created: eventCreated,
+            dwell: eam.create(eam.Dwell, options.element.dwell),
+            initiator: element,
+            receiver: element.closest('role', 'anchor,button,field,heading') || element
+        };
+
+        return interaction;
+    }
+
+    /**
+     * Prepares Interaction Model for reporting and initiates reporting process.
+     * @param {EAM.Interaction.Model}   i9n Interaction to complete
+     */
+    function complete(i9n) {
+        i9n.dwell.pause();
+        if (last &amp;&amp; i9n.initiator.node == last.initiator.node) {
+            last.dwell.overtime(i9n.dwell.total());
+        } else {
+            reportLast();
+            last = i9n;
+            eam.timeout(reportLast, EVENT_FIXATION_TIME);
+        }
+    }
+
+    /**
+     * Reports last completed interaction
+     * @param {EAM.Interaction.Model}   i9n Interaction to complete
+     */
+    function reportLast() {
+        if (last == eam.none) return;
+        //console.log('event reported', last.initiator.tag()+'/'+ last.receiver.tag() );
+        eam.events.push({
+            type: 'event',
+            category: 'element',
+            action: 'interaction',
+            data: last
+        });
+        last = eam.none;
+    }
+
+    /**
+     * Swaps Elements for two interactions and completes first of them.
+     * Used for resolving event bubbling issue when events are received in wrong order (older events with lower event.simeStamp received after more recent events).
+     * @param {EAM.Interaction.Model}   prematureInteraction Interation for event which was received earlier than should.
+     * @param {EAM.Interaction.Model}   bubbledInteraction   Interation for delayed event which was received later than should.
+     */
+    function swapAndComplete(prematureInteraction, bubbledInteraction) {
+
+        var prematureElements = {
+            initiator: prematureInteraction.initiator,
+            receiver: prematureInteraction.receiver
+        };
+        var bubbledElements = {
+            initiator: bubbledInteraction.initiator,
+            receiver: bubbledInteraction.receiver
+        };
+
+        eam.$.extend(prematureInteraction, bubbledElements);
+        eam.$.extend(bubbledInteraction, prematureElements);
+        complete(prematureInteraction);
+
+
+        return bubbledInteraction;
+    }
+
+    /**
+     * Decides if Event indicates current or new Interaction that should be created.
+     * Used for resolving event bubbling issue when events are received in wrong order (older events with lower event.simeStamp received after more recent events).
+     * @param {EAM.Interaction.Model}  i9n            Interaction to update
+     * @param {Node}                   node           Target Node for event
+     * @param {EAM.Time}               eventCreated   Time when event was created.
+     * @param {DOMEvent}               event          Event.
+     * @returns {EAM.Interaction.Model} Current interaction
+     */
+    function update(i9n, node, eventCreated, event) {
+        var current = i9n;
+        var isNewEvent = (eventCreated - current.created) > EVENT_FIXATION_TIME;
+        var isBubbledEvent = eventCreated &lt; current.created;
+        var isCurrent = (node == current.initiator.node || node == current.receiver.node);
+        var isLast = last &amp;&amp; (node == last.initiator.node || node == last.receiver.node);
+
+        //var action = 'none';
+
+        if (!isCurrent) {
+            if (isNewEvent) {
+                complete(current);
+                current = start(node, eventCreated);
+                //action = 'started/compl/start';
+            } else if (isBubbledEvent) {
+                var bubbledInteraction = start(node, eventCreated);
+                current = swapAndComplete(current, bubbledInteraction);
+                //action = 'swap';
+            } else {
+                if (current.started) {
+                    complete(current);
+                    current = start(node, eventCreated, true);
+                    //action = 'fixation/compl/start';
+                } else if (!isLast) {
+                    //action = 'update/rec';
+                    var element = eam.create(eam.Element, node, options.element);
+                    current.receiver = element.closest('role', 'anchor,button,field,heading') || element;
+                    current.started = eventCreated;
+                }
+            }
+        }
+        /*
+         console.log(
+         'event', event.type+'/'+node.tagName,
+         'action', action,
+         'delay', eventCreated - current.created,
+         'new', isNewEvent,
+         'bubbled', isBubbledEvent,
+         'current', isCurrent,
+         'last', isLast);
+         */
+        return current;
+    }
+
+
+    /**
+     * Register listeners by a given options.
+     * @private
+     * @param {EAM.Options.Listen} listenOptions Events to listen.
+     * @param {Function}           handler       Event handler.
+     */
+    function listen(listenOptions, handler) {
+        eam.listen(eam.global, listenOptions.global, [handler]);
+        eam.listen(eam.context, listenOptions.context, [handler]);
+    }
+
+
+    listen(
+        options.element.dwell.listen,
+        function (event) {
+            if (current == eam.none) return;
+            var isGlobal = (event.target == eam.global);
+            var isDeactivation = (event.type == 'blur');
+            return (isGlobal &amp;&amp; isDeactivation)
+                ? current.dwell.pause()
+                : current.dwell.startOrProlong();
+        });
+
+    listen(
+        options.listen,
+        function (event) {
+            var target = event.target;
+            if (target == eam.global) {
+                if (current &amp;&amp; event.type == 'unload') {
+                    current = complete(current);
+                    reportLast();
+                }
+            } else if (target != eam.none &amp;&amp; target != eam.context) {
+                var timeStamp = event.timeStamp || eam.time();
+                current = (current == eam.none)
+                    ? start(target, timeStamp)
+                    : update(current, target, timeStamp, event);
+            }
+        });
+
+
+}
+
+module.exports = Interaction;</pre>
+        </article>
+    </section>
+
+
+
+
+
+				</div>
+
+				<div class="clearfix"></div>
+				<footer>
+					
+					
+		<span class="jsdoc-message">
+		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
+		on Fri May 08 2015 02:38:00 GMT+0300 (FLE Daylight Time) using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
+		</span>
+				</footer>
+			</div>
+
+			
+			<br clear="both">
+		</div>
+
+	</div>
+	<script src="scripts/sunlight.js"></script>
+	<script src="scripts/sunlight.javascript.js"></script>
+	<script src="scripts/sunlight-plugin.doclinks.js"></script>
+	<script src="scripts/sunlight-plugin.linenumbers.js"></script>
+	<script src="scripts/sunlight-plugin.menu.js"></script>
+	<script src="scripts/jquery.min.js"></script>
+	<script src="scripts/jquery.scrollTo.js"></script>
+	<script src="scripts/jquery.localScroll.js"></script>
+	<script src="scripts/bootstrap-dropdown.js"></script>
+	<script src="scripts/toc.js"></script>
+
+
+	<script>  Sunlight.highlightAll({lineNumbers:true,  showMenu: true, enableDoclinks :true}); </script>
+
+	<script>
+		$( function () {
+			$( "#toc" ).toc( {
+				selectors   : "h1,h2,h3,h4",
+				showAndHide : false,
+				scrollTo    : 60
+			} );
+			$( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+			$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+
+		} );
+	</script>
+
+	
+	<script>
+		$( function () {
+			$('#main').localScroll({
+				offset: { top: 56 } //offset by the height of your header (give or take a few px, see what works for you)
+			});
+			$( "dt h4.name" ).each( function () {
+				var $this = $( this );
+				var icon = $( "<i/>" ).addClass( "icon-plus-sign" ).addClass( "pull-right" ).addClass( "icon-white" );
+				var dt = $this.parents( "dt" );
+				var children = dt.next( "dd" );
+
+				$this.append( icon ).css( {cursor : "pointer"} );
+				$this.addClass( "member-collapsed" ).addClass( "member" );
+
+				children.hide();
+				$this.toggle( function () {
+					icon.addClass( "icon-minus-sign" ).removeClass( "icon-plus-sign" ).removeClass( "icon-white" );
+					$this.addClass( "member-open" ).removeClass( "member-collapsed" );
+					children.slideDown();
+				}, function () {
+					icon.addClass( "icon-plus-sign" ).removeClass( "icon-minus-sign" ).addClass( "icon-white" );
+					$this.addClass( "member-collapsed" ).removeClass( "member-open" );
+					children.slideUp();
+				} );
+			} );
+		} );
+	</script>
+	
+
+</body>
+</html>

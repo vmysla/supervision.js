@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for EngagementAnalyticsModel\lib\selected-dom\selected-dom.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../prettify.css">
+    <link rel="stylesheet" href="../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">EngagementAnalyticsModel\lib\selected-dom\selected-dom.js</span></h1>
+    <h2>
+        Statements: <span class="metric">93.75% <small>(30 / 32)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">70% <small>(14 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">50% <small>(1 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">96.43% <small>(27 / 28)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">EngagementAnalyticsModel/lib/selected-dom/</a> &#187; selected-dom.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">49</span>
+<span class="cline-any cline-yes">49</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">49</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-yes">62</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">49</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+var re = /([a-z0-9]+)?(\:(?:button|image|submit|reset|checkbox|text|password))?(\[.*\])?([^:]+)?(\:.*)?/i;
+&nbsp;
+function domMarkup(selector, noncilcular){
+&nbsp;
+  var tags = selector.split(/\s*&gt;\s*/);
+  var dom, 
+      last_selector = 'document', 
+      last = noncilcular ? <span class="branch-0 cbranch-no" title="branch not covered" >'document' </span>: document;
+&nbsp;
+  for(var i=0;i&lt;tags.length;i++){
+&nbsp;
+    var parts = tags[i].match(re);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(!parts) <span class="cstat-no" title="statement not covered" >throw "Error parsing "+tags[i];</span>
+    
+    var tag         = parts[1], 
+        type        = parts[2]
+        attributes  = parts[3], 
+        classes     = parts[4], 
+        pseudo      = parts[5];
+&nbsp;
+    var elm = { 
+           tagName    : tag, 
+           nodeName   : tag,
+           type       : type ? <span class="branch-0 cbranch-no" title="branch not covered" >type.substring(1, type.length) </span>: window.undef,
+           attributes : attributes? attributes.substring(1,attributes.length-1).split(',') : [],
+           innerText  : '',
+           className  : classes ? classes : '',
+           pseudo     : pseudo ? pseudo.substring(1,pseudo.length).split(':') : [],
+        }
+&nbsp;
+   for(var j=elm.attributes.length;j--;){
+     var attr = elm.attributes[j].split('=');
+     elm[ attr[0] ] = attr[1] || <span class="branch-1 cbranch-no" title="branch not covered" >'';</span>
+     elm[ attr[0] ] = elm[ attr[0] ].replace('`',',');
+   }
+&nbsp;
+   for(var j=elm.pseudo.length;j--;){
+     var attr = elm.pseudo[j].replace(/[")]/ig,'').split('(');
+     <span class="missing-if-branch" title="else path not taken" >E</span>if(attr[0]=='contains') elm.innerText = attr[1];
+&nbsp;
+   }
+   // cleanup temporary data
+   delete elm.attributes;
+   delete elm.pseudo;
+   // replace ref. nodes with strings for JSON.stringify
+   elm.parentNode = noncilcular ? <span class="branch-0 cbranch-no" title="branch not covered" >last_selector </span>: last;
+   elm.children = [];
+   // update tree   
+   if(!dom){ dom = elm } else { last.children.push(elm); }
+   last = elm;
+   last_selector = tags[i];
+   //console.log(i, tags[i], parts, elm, dom || 'dom', last || 'last');
+  }
+  this.node = dom;
+}
+domMarkup.node = <span class="fstat-no" title="function not covered" >function(selector, noncilcular){</span>
+<span class="cstat-no" title="statement not covered" >  return domMarkup(selector, noncilcular).node;</span>
+}
+&nbsp;
+module.exports = domMarkup;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri May 08 2015 02:38:04 GMT+0300 (FLE Daylight Time)</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

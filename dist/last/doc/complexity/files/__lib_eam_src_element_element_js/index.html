@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - ./lib/eam/src/element/element.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>./lib/eam/src/element/element.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">74.61</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">227</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">22.66</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.22</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/** @namespace EAM.Element **/
+
+ /**
+ * @typedef {Object} Options
+ * @memberof EAM.Element
+ */
+
+ /**
+ * Element
+ * @class
+ * @memberof EAM.Element
+ * @param {EAM.EAM} eam
+ * @param {EAM.Node} node
+ * @param {EAM.Element.Options} options Initial configuration.
+ */
+function Element(eam, node, options){
+
+	/**
+	* @typedef {Object} Model
+	* @memberof EAM.Element.Element
+	* @property {EAM.Element.ElementSelector} selector
+	*/
+
+	/** @type {EAM.Element.ElementSelector} */
+    var selector = eam.create(eam.ElementSelector, node, options);
+
+	 /**
+	  *
+	  * @param getter
+	  * @param isCached
+	  * @param filter
+	  * @returns {Function}
+	  */
+	function customized(getter, isCached, filter){
+		var cachedValue = getter();
+		return function(){
+			if(!isCached || !cachedValue) cachedValue = getter();
+			return filter ? filter.call(this, cachedValue) : cachedValue;
+		};
+	}
+	/** 
+	* Node
+	*/
+	this.node = node;
+
+	/** 
+	* Get CSS selector of single element without including parent elements.
+	* @returns {String} 
+	*/
+	this.selector = customized(function(){ return selector.tag(); }, true);
+
+	/** 
+	* Get CSS selector path including parent elements.
+	* @returns {String} 
+	*/
+    this.path = customized(function() { return selector.path(); }, true);
+
+	/** 
+	* Get Element ID Attribute
+	* @returns {String} 
+	*/
+	this.id = function(){ return node.id; };
+
+
+
+	/**
+	* @todo document as enum
+	* @typedef {Object} Role
+	* @memberof EAM.Element
+	* @property {String} anchor
+	* @property {String} image
+	* @property {String} heading
+	* @property {String} button
+	* @property {String} field
+	* @property {String} text
+	*/
+
+	/** 
+	* Get Element Role
+	* @returns {EAM.Element.Role}
+	*/
+	this.role = role;	
+
+	/** 
+	* Get Element Tag name. It also includes Type attribute for INPUT elements.
+	* @returns {String}
+	*/
+	this.tag = tag;
+
+
+	 /**
+	 * Get closest node by a given criteria.
+	 * @memberof EAM.Element
+	 * @param {String}       attr    Attribute to test.
+	 * @param {EAM.Values}   values  Values to search.
+	 * @returns {EAM.Element|EAM.none} Node or its closest parent that match given criteria.
+	 */
+	this.closest = function(attr, values){
+		var tested = node;
+		while(tested &amp;&amp; tested != eam.context){
+			var elm = eam.create(eam.Element, tested, options);
+			var attrGetter = elm[attr];
+			var attrValueMatched = eam.getWhenAny(true, attrGetter(), values);
+			if(attrValueMatched) {
+				return elm;
+			}
+			tested = tested.parentNode;
+		}
+	};
+
+	/** 
+	* Get linked Url for Anchor elements
+	* @returns {(EAM.Url)}
+	*/
+	this.anchor = function(){
+		var link = eam.getWhenAny(node.href, role(), &#039;anchor&#039;);
+		return eam.url(link);
+	};
+
+	/** 
+	* Get source Url for Image Elements
+	* @returns {(EAM.Url)}
+	*/
+	this.image = function(){
+		var source = eam.getWhenAny(node.src, tag(), &#039;img,input:image&#039;);
+		return eam.url(source);
+	};
+
+	/** 
+	* Get current value for Field elements
+	* @returns {String}
+	*/
+	this.value = customized(function(){
+		// @todo textarea, select, etc.
+		var nodeTag = tag();
+		return eam.getWhenAny(content() , nodeTag, &#039;textarea&#039;)
+			|| eam.getWhenAny(checked() , nodeTag, &#039;input:checkbox&#039;)
+			|| eam.getWhenAny(node.value, nodeTag, &#039;input:password&#039;) &amp;&amp; &#039;*****&#039;
+			|| eam.getWhenAny(node.value, role() , &#039;field&#039;);
+	}, false, options.shortValue);
+
+	/** 
+	* Get Element text
+	* @returns {String}
+	*/
+	this.text = function(){
+		var nodeTag = tag();
+		return content()
+			|| eam.getWhenAny(node.title || node.alt, nodeTag, &#039;a,img,input:image&#039;)
+			|| eam.getWhenAny(node.value, nodeTag, &#039;input:button,input:submit,input:reset&#039;);
+	};
+
+	/** 
+	* Get Element Role	
+	* @returns {EAM.Element.Role}
+	*/
+	function role(){
+		var nodeTagName = tagName();
+		var nodeTag     = tag();
+		var nodeRole = (nested() == &#039;no&#039;) ? eam.getWhenAny( &#039;text&#039;, nodeTagName, &#039;div,li,oi,di,dd,dt&#039;) : eam.none;
+		return nodeRole
+			|| eam.getWhenAny( &#039;anchor&#039; , nodeTag    , &#039;a&#039;)
+			|| eam.getWhenAny( &#039;image&#039;  , nodeTag    , &#039;img,input:image&#039;)
+			|| eam.getWhenAny( &#039;button&#039; , nodeTag    , &#039;button,input:button,input:image,input:reset,input:submit&#039;)
+			|| eam.getWhenAny( &#039;heading&#039;, nodeTagName, &#039;h1,h2,h3,h4,h5,h6&#039;)
+			|| eam.getWhenAny( &#039;field&#039;  , nodeTagName, &#039;input,textarea,select&#039;)
+			|| eam.getWhenAny( &#039;text&#039;   , nodeTagName, &#039;span,p,b,i,u,strong,em,addr&#039;);
+	}
+
+	/** 
+	* Get nested content for Element
+	* @private
+	* @returns {String}
+	*/
+	function content(){
+		var nodeTag  = tag();
+		var nodeRole = role();
+		var allowed = false
+			     || eam.getWhenAny(true, nodeRole, &#039;text,anchor,field,button,image,heading&#039;) 
+			     || eam.getWhenAny(true, nodeTag, &#039;label&#039;);
+		var nodeContent = allowed ? node.innerText.replace(/[\s\t\r\n]+/ig,&#039; &#039;) : &#039;&#039;;
+		if(nodeContent != &#039;&#039; &amp;&amp; nodeContent != &#039; &#039;) return nodeContent;
+	}
+
+	/**
+	* @todo documment as enum
+	* @typedef {Object} Checked
+	* @memberof EAM.Element
+	* @property {String} checked
+	* @property {String} unchecked
+	*/
+
+	/** 
+	* Get string value of checked attribute for Checkbox Fields
+	* @private
+	* @returns {EAM.Element.Checked}
+	*/
+	function checked(){
+		if(node.checked != eam.none) return node.checked ? &#039;checked&#039; : &#039;unchecked&#039;;
+	}
+
+	/** 
+	* Indicates if Element is used as container for other Elements.
+	* @private
+	* @returns {String}
+	*/
+	function nested(){
+		return (!node.children || node.children.length == 0) ? &#039;no&#039; : &#039;yes&#039;;
+	}
+
+	/** 
+	* Get Element Tag name. It also includes Type attribute for INPUT elements.
+	* @private
+	* @returns {String}
+	*/
+	function tag(){
+		var nodeTagName = tagName();
+		var nodeTagType = tagType() || &#039;text&#039;;
+		return (nodeTagName == &#039;input&#039;) ? (nodeTagName + &#039;:&#039; + nodeTagType) : nodeTagName;
+	}
+
+	/** 
+	* Get Tag Name for Element
+	* @private
+	* @returns {String}
+	*/
+	function tagName(){
+		var nodeName = node.localName || node.tagName;
+		return nodeName &amp;&amp; nodeName.toLowerCase();
+	}
+
+	/** 
+	* Get value of Type attribute for Element
+	* @private
+	* @returns {String}
+	*/
+	function tagType(){
+		return node.type &amp;&amp; node.type.toLowerCase();
+	}
+}
+
+module.exports = Element;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for eam\src\interaction\interaction.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../prettify.css">
+    <link rel="stylesheet" href="../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">eam\src\interaction\interaction.js</span></h1>
+    <h2>
+        Statements: <span class="metric">95.89% <small>(70 / 73)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">92.5% <small>(37 / 40)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">98.48% <small>(65 / 66)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">eam/src/interaction/</a> &#187; interaction.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js">/** @namespace EAM.Interaction **/
+&nbsp;
+/**
+ * @typedef {Object} Options
+ * @memberof EAM.Interaction
+ */
+&nbsp;
+&nbsp;
+var Element = require('./../element/element.js');
+var Dwell = require('./../dwell/dwell.js');
+&nbsp;
+ /**
+ * 
+ * @class
+ * @memberof EAM.Interaction
+ * @param {EAM.Eam} eam
+ * @param {EAM.Interaction.Options} options Initial configuration.
+ */
+function Interaction(eam, options){
+&nbsp;
+	function closest(node, attr, values){
+		var tested = node;
+		while(tested != null &amp;&amp; tested != document){
+			var elm = new Element(eam, tested, options),
+				getter = elm[attr],
+				matched = eam.getWhenAny(elm, getter(), values);
+			if(matched) return elm;
+			tested = tested.parentNode;
+		}
+	}
+	
+	function InteractionModel(eam, node, options){
+		this.time       = eam.time();
+		this.dwell		= new Dwell(eam, { start: true, latency : 0 });
+		this.initiator	= new Element(eam, node, options);
+		this.receiver	= closest(node, 'role', 'anchor,button,field,heading') || this.initiator;
+	}	
+&nbsp;
+	var model = eam.none;
+	this.model = function(){ return model;};
+&nbsp;
+	function nodeHandler(event){
+&nbsp;
+	 //console.log('node handler ', event.type, typeof(event.target), event.target.tagName, event.target.id );
+&nbsp;
+		if(event.type == 'unload'){
+			model.dwell.stop();
+			var copy = eam.$.extend({}, model);
+			eam.history.push(copy);
+			model = eam.none;
+			return;
+		}
+&nbsp;
+		<span class="missing-if-branch" title="if path not taken" >I</span>if(!event.target || !event.target.tagName){
+		 //console.log('node handler ignored event');
+<span class="cstat-no" title="statement not covered" >			return;</span>
+		} 
+&nbsp;
+		
+		
+		//todo: autoreport (after timeout?) when receiver isn't field
+&nbsp;
+		var node = event.target,
+			curr = new InteractionModel(eam, node, options),
+			last = model;
+&nbsp;
+	 //console.log('interaction model ', typeof(last), typeof(curr) );
+&nbsp;
+		if(last == eam.none){
+		 //console.log('first interaction');
+			return model = curr;
+		} 
+&nbsp;
+		var delay = curr.time - last.time
+			forwarded = delay &lt;= 300,
+			receiver = eam.getWhenAny(last.receiver, last.receiver.role(), 'anchor,button,field,heading');
+&nbsp;
+		if(forwarded == true){
+		 //console.log('interaction forwarded');
+			if(receiver == eam.none){
+			 //console.log('interaction forwarded used for receiver');
+				last.receiver = curr.receiver;
+				last.time = curr.time;	
+			}
+		} else if(last.initiator.node != curr.initiator.node){
+		//todo: figureout why empty interactions are reported
+		 //console.log('new interaction');
+			//var path = model.initiator.path();
+			model.dwell.stop();
+			var copy = eam.$.extend({}, model);
+			eam.history.push(copy);
+			model = curr;
+			//console.log('previous path', path, copy.initiator.path() );
+		} else {
+		 //console.log('interaction continued..');
+			//metric events++
+			last.time = curr.time;
+		}
+	};
+&nbsp;
+	function dwellHandler(event){
+		var stopped = (event.target == window &amp;&amp; event.type == 'blur');
+		if(stopped) {
+			model.dwell.stop();
+		}
+		else {
+			model.dwell.start();
+		}
+	};
+&nbsp;
+	function historyHandler(model){
+		
+		var element = model;
+&nbsp;
+	 //console.log('history', element.initiator.path(), element.receiver.path() );
+&nbsp;
+		function attr(name, backward, defaults, stringify){
+			
+			if(arguments.length &lt; 3) return attr(name, backward, 'Not Set', true);
+			<span class="missing-if-branch" title="if path not taken" >I</span>if(element == eam.none) <span class="cstat-no" title="statement not covered" >return defaults;</span>
+&nbsp;
+			var initiator = element.initiator,
+				receiver  = element.receiver,
+				elements  = backward == true ? [initiator,receiver] : [receiver, initiator],
+				value = elements[0][name]();
+&nbsp;
+			if(value == eam.none) value = elements[1][name]();
+			if(value == eam.none) value = defaults;	
+&nbsp;
+			return stringify == false ? value : value.toString();
+		};
+&nbsp;
+		<span class="missing-if-branch" title="if path not taken" >I</span>if(element == eam.none || attr('role', false, eam.none, false) == eam.none) <span class="cstat-no" title="statement not covered" >return;</span>
+&nbsp;
+		return {
+			eventCategory	: 'element',
+			eventAction		: 'interaction',
+			eventLabel		: 'unknown',
+			dimension41		: 'eam=0.0.1a;',
+			dimension42  	: attr('selector'),
+			dimension43     : attr('path', true),
+			dimension44     : attr('role'),
+			dimension45     : attr('text', 500), 
+			dimension46     : attr('value'),
+			dimension47     : attr('image', true),
+			dimension48     : attr('anchor'),
+			metric16     	: model.dwell.total()
+		};
+	};
+&nbsp;
+	eam.hit = historyHandler;
+&nbsp;
+	eam.history.push = function(model){
+		var hit = eam.hit(model);
+		//if(hit) //console.log('send', 'event', hit);
+		return [].push.call(eam.history, model);
+	}
+&nbsp;
+	eam.listen(document, 'click,mousedown',[dwellHandler, nodeHandler]);
+	eam.listen(document, 'keypress',[dwellHandler, nodeHandler]);
+	eam.listen(document, 'focusin,focusout,mousemove,mouseup,keydown,keyup',[dwellHandler]);
+	eam.listen(window,   'resize,scroll,focus,blur',[dwellHandler]);
+	eam.listen(window,   'unload', [nodeHandler]);
+}
+&nbsp;
+module.exports = Interaction</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Apr 23 2015 03:27:31 GMT+0300 (FLE Daylight Time)</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

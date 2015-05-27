@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for EngagementAnalyticsModel\lib\eam\src\eam.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header medium">
+    <h1>Code coverage report for <span class="entity">EngagementAnalyticsModel\lib\eam\src\eam.js</span></h1>
+    <h2>
+        Statements: <span class="metric">57.38% <small>(35 / 61)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">57.14% <small>(8 / 14)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">38.46% <small>(5 / 13)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">58.18% <small>(32 / 55)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">EngagementAnalyticsModel/lib/eam/src/</a> &#187; eam.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">294</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">24</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">1548</span>
+<span class="cline-any cline-yes">1548</span>
+<span class="cline-any cline-yes">4117</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js"> /** @namespace EAM **/
+&nbsp;
+ /**
+ * Engagement Analytics Model
+ * @class
+ * @memberof EAM
+ * @param {EAM.Options} options Global configuration.
+ * @todo describe structure of EAM.Eam.Options
+ * @todo provide examples for public methods
+ * @todo write more tests
+ */
+function EAM(options){
+&nbsp;
+	var eam = this;
+&nbsp;
+	/** @param {Boolean} available Indicates if EAM has everything to work. Value can be changed to False by any module that works with it. */
+	eam.available = true;
+&nbsp;
+	/** Makes EAM unavailable **/
+	this.stop = <span class="fstat-no" title="function not covered" >function (){ </span>
+<span class="cstat-no" title="statement not covered" >		eam.available = false; </span>
+<span class="cstat-no" title="statement not covered" >		eam.create  = eam.doNothing;</span>
+<span class="cstat-no" title="statement not covered" >		eam.listen  = eam.doNothing;</span>
+<span class="cstat-no" title="statement not covered" >		eam.timeout = eam.doNothing;</span>
+	};
+&nbsp;
+	/** Creates an instance of any EAM-module
+	 * @param {Class}       Class to create.
+	 * @param {Object}      Custom Param to pass
+	 * @param {EAM.Options} Custom Options to pass
+     * @returns {Object} Object Instance.
+     */	
+	this.create = function (Module, paramAndOptions){ 
+		return (arguments.length == 2)
+					? new Module(eam, arguments[1])
+					: new Module(eam, arguments[1], arguments[2] );
+	};
+&nbsp;
+	this.get = <span class="fstat-no" title="function not covered" >function (getter, param){ </span>
+<span class="cstat-no" title="statement not covered" >		return getter.apply(eam, [getter, param]);</span>
+	};
+&nbsp;
+ 	/** @const {EAM.Options} options*/
+	eam.options = options;
+&nbsp;
+	/** @const {Window} global */
+	eam.global = options.global;
+&nbsp;
+	/** @const {Document} context */	
+	eam.context = options.context;
+&nbsp;
+	/** @const {Undefined} none */	
+	eam.none = options.none;
+&nbsp;
+	/**
+	* @typedef {Object} Model POJO object that describes some buisness object or its part.
+	* @property {String}   type     Only "event" is currently allowed.
+ 	* @property {String}   category Typically the object that model describes (e.g. element, page).
+ 	* @property {String}   action   The type of interaction which produced this model (e.g. click).
+ 	* @property {Object[]} data     Flat dictionary data describing original object.
+	* @memberof EAM
+	*/
+&nbsp;
+	/** 
+	 * List of all Models which are ready to be reported.
+     * @property {EAM.Model[]} events
+     */	
+	eam.events = [];
+&nbsp;
+	/** 
+	 * Utility object that determines which helper to load.
+     * @property {EAM.Helper} helper
+     * @private
+     */	
+	var helper = eam.create(eam.Helper, options.helper);
+&nbsp;
+	/** 
+	 * Provides a subset of jQuery API needed for work.
+     * @property {EAM.Helper} $
+     */
+	eam.$      = helper.$;
+&nbsp;
+	/**
+	* @typedef {Number} Time Time in miliseconds.
+	* @memberof EAM
+	*/
+&nbsp;
+	/**
+	* @typedef {Number} Duration Time in seconds.
+	* @memberof EAM
+	*/
+&nbsp;
+	/** Get normalized Url.
+	 * @param {String}    Url to format.
+     * @returns {EAM.Url} Url address.
+     */	
+	this.url = function(url){
+		if(!url) return;
+		var suppressedProtocols = url.match(/^(javascript|data):/i);
+		if(suppressedProtocols) return suppressedProtocols.pop();
+		// @todo normalize &amp; skip current, etc.
+		return url;
+	};
+&nbsp;
+	/** Get current time.
+     * @returns {EAM.Time} Time in seconds.
+     */	
+	this.time = <span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >		var now = new Date();</span>
+<span class="cstat-no" title="statement not covered" >		return now.getTime();</span>
+	};
+&nbsp;
+	/** Creates timer to call a function.
+     * @returns {Handler} ID.
+     */	
+	this.timeout = <span class="fstat-no" title="function not covered" >function(fn, delay){</span>
+	
+<span class="cstat-no" title="statement not covered" >		if(arguments.length==1) <span class="cstat-no" title="statement not covered" >return fn();</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		var timeoutHandler;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		timeoutHandler = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >			timeoutHandler.stop();</span>
+<span class="cstat-no" title="statement not covered" >			if(timeoutHandler.fn) <span class="cstat-no" title="statement not covered" >timeoutHandler.fn();</span></span>
+<span class="cstat-no" title="statement not covered" >			timeoutHandler.fn = eam.none;</span>
+		};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		timeoutHandler.stop = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >			if(timeoutHandler.id) <span class="cstat-no" title="statement not covered" >eam.global['clearTimeout'](timeoutHandler.id);</span></span>
+<span class="cstat-no" title="statement not covered" >			timeoutHandler.id = eam.none;</span>
+		};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		timeoutHandler.fn = fn;</span>
+<span class="cstat-no" title="statement not covered" >		timeoutHandler.id = eam.global['setTimeout'](timeoutHandler, delay);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return timeoutHandler;</span>
+	};
+&nbsp;
+	/** Console log. */	
+	eam.log = <span class="fstat-no" title="function not covered" >function(){</span>};
+&nbsp;
+	/**
+	* @typedef {String} Values Comma-separated list of strings without quotations.
+	* @memberof EAM
+	*/
+&nbsp;
+	/** 
+	 * Get value if a given key was faund in a list.
+	 * @param {Object}     result Value to return.
+	 * @param {String}     key    What to find.
+	 * @param {EAM.Values} values Where to search.
+     * @returns {?Object}         Result when given key was found.
+     */	
+	this.getWhenAny = function(result, key, values){
+		var items = values.split(',');
+		for(var i=items.length;i--;){
+			if(items[i] == key) return result;
+		}
+	};
+&nbsp;
+	/** 
+	 * Register event listeners.
+	 * @param {(Document|Window|Node)} context   Object to attach.
+	 * @param {EAM.Values}             events    One or more events for listening.
+	 * @param {Function[]}             listeners Array of event listeners.
+     */	
+	this.listen = function(context, events, listeners){
+&nbsp;
+		var $context = eam.$(context),
+			names = events.split(',');
+&nbsp;
+		for(var i=0; i&lt;names.length; i++){
+&nbsp;
+<span class="fstat-no" title="function not covered" >			function notifyListeners(event){</span>
+<span class="cstat-no" title="statement not covered" >				var index = listeners.length;</span>
+<span class="cstat-no" title="statement not covered" >				while(index&gt;0){</span>
+<span class="cstat-no" title="statement not covered" >					var listener = listeners[--index];</span>
+<span class="cstat-no" title="statement not covered" >					listener(event);</span>
+				};
+			};
+&nbsp;
+			$context.bind(names[i], notifyListeners);	
+		}
+	};
+&nbsp;
+}
+&nbsp;
+module.exports = EAM;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri May 08 2015 02:38:04 GMT+0300 (FLE Daylight Time)</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: interaction/interaction.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: interaction/interaction.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @namespace EAM.Interaction **/
+
+/**
+ * @typedef {Object} Options
+ * @memberof EAM.Interaction
+ */
+
+
+var Element = require('./../element/element.js');
+var Dwell = require('./../dwell/dwell.js');
+
+ /**
+ * 
+ * @class
+ * @memberof EAM.Interaction
+ * @param {EAM.Eam} eam
+ * @param {EAM.Interaction.Options} options Initial configuration.
+ */
+function Interaction(eam, node, options){
+
+	function closest(attr, values){
+		var tested = node;
+		while(tested != null &amp;&amp; tested != document){
+			var elm = new Element(eam, tested, options),
+				getter = elm[attr],
+				matched = eam.getWhenAny(elm, getter(), values);
+			if(matched) return elm;
+			tested = tested.parentNode;
+		}
+	}
+	
+	var model = {
+		time        : eam.time(),
+		dwell		: new Dwell(eam, { start: true, latency : 0 }),
+		initiator	: new Element(eam, node, options),
+		receiver	: eam.none
+	}
+
+	model.receiver = closest('role', 'anchor,button,field,heading') || model.initiator;
+
+	function nodeHandler(event){
+
+		//todo: autoreport (after timeout?) when receiver isn't field
+
+		var node = event.target,
+			curr = new Interaction(eam, node, options),
+			last = model;
+
+		if(last == eam.none) return model = curr;
+
+		var delay = curr.time - last.time
+			forwarded = delay &lt;= 300,
+			receiver = eam.getWhenAny(last.receiver, last.receiver.role(), 'anchor,button,field,heading');
+
+		if(forwarded == true){
+			if(receiver == eam.none){
+				last.receiver = curr.receiver;
+				last.time = curr.time;	
+			}
+		} else if(last.initiator.node != curr.initiator.node){
+		//todo: figureout why empty interactions are reported
+			model.dwell.stop();
+			var copy = eam.$.extend({}, model);
+			eam.history.push(copy);
+			model = curr;
+		} else {
+			//metric events++
+			last.time = curr.time;
+		}
+	};
+
+	function dwellHandler(event){
+		var stopped = (event.target == window &amp;&amp; event.type == 'blur');
+		if(stopped) {
+			model.dwell.stop();
+		}
+		else {
+			model.dwell.start();
+		}
+	};
+
+	function historyHandler(model){
+		
+		var element = model;
+
+		function attr(name, backward, defaults, stringify){
+			
+			if(arguments.length &lt; 3) return attr(name, backward, 'Not Set', true);
+			if(element == eam.none) return defaults;
+
+			var initiator = element.initiator,
+				receiver  = element.receiver,
+				elements  = backward == true ? [initiator,receiver] : [receiver, initiator],
+				value = elements[0][name]();
+
+			if(value == eam.none) value = elements[1][name]();
+			if(value == eam.none) value = defaults;	
+
+			return stringify == false ? value : value.toString();
+		};
+
+		if(element == eam.none || attr('role', false, eam.none, false) == eam.none) return;
+
+		return {
+			eventCategory	: 'element',
+			eventAction		: 'interaction',
+			eventLabel		: 'unknown',
+			dimension41		: 'eam=0.0.1a;',
+			dimension42  	: attr('selector'),
+			dimension43     : attr('path', true),
+			dimension44     : attr('role'),
+			dimension45     : attr('text', 500), 
+			dimension46     : attr('value'),
+			dimension47     : attr('image', true),
+			dimension48     : attr('anchor'),
+			metric16     	: model.dwell.total()
+		};
+	};
+
+	eam.hit = historyHandler;
+
+	eam.history.push = function(model){
+		var hit = eam.hit(model);
+		if(hit)	console.log('send', 'event', hit);
+		return [].push.call(eam.history, model);
+	}
+
+	eam.listen(document, 'click,mousedown',[dwellHandler, nodeHandler]);
+	eam.listen(document, 'keypress',[dwellHandler, nodeHandler]);
+	eam.listen(document, 'focusin,focusout,mousemove,mouseup,keydown,keyup',[dwellHandler]);
+	eam.listen(window,   'resize,scroll,focus,blur',[dwellHandler]);
+	eam.listen(window,   'unload', [nodeHandler]);
+
+}
+
+module.exports = Interaction</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EAM.Dwell.Dwell.html">Dwell</a></li><li><a href="EAM.Dwell.DwellTimer.html">DwellTimer</a></li><li><a href="EAM.Eam.html">Eam</a></li><li><a href="EAM.Element.Element.html">Element</a></li><li><a href="EAM.Element.ElementSelector.html">ElementSelector</a></li><li><a href="EAM.Helper.Helper.html">Helper</a></li><li><a href="EAM.Helper.HelperJQuery.html">HelperJQuery</a></li><li><a href="EAM.Helper.HelperNode.html">HelperNode</a></li><li><a href="EAM.Helper.HelperSatellite.html">HelperSatellite</a></li><li><a href="EAM.Interaction.Interaction.html">Interaction</a></li></ul><h3>Namespaces</h3><ul><li><a href="EAM.html">EAM</a></li><li><a href="EAM.Dwell.html">Dwell</a></li><li><a href="EAM.Element.html">Element</a></li><li><a href="EAM.Helper.html">Helper</a></li><li><a href="EAM.Interaction.html">Interaction</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a> on Wed Apr 22 2015 02:09:58 GMT+0300 (FLE Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

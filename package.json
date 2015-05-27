@@ -1,0 +1,34 @@
+{
+  "name": "EAM",
+  "version": "0.0.4",
+  "description": " ..",
+  "main": "index.js",
+  "author": "Vlad Mysla",
+  "license": "MIT",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.justanswer.local/git/ja-dtm"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "browserify-istanbul": "^0.1.3",
+    "gulp": "~3.8.0",
+    "gulp-sourcemaps": "~1.2.4",
+    "gulp-jsdoc": "^0.1.4",
+    "gulp-karma": "0.0.4",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.0.1",
+    "gulp-validate-jsdoc": "^0.1.1",
+    "gulp-browserify": "^0.5.0",
+    "gulp-closure-compiler-service": "^0.1.2",
+    "plato": "^1.3.0",
+    "karma": "^0.12.31",
+    "karma-browserify": "git+https://github.com/nikku/karma-browserify.git#67fec5c999e75cab95873b9365a9cfc3b57a5573",
+    "karma-coverage": "0.2.6",
+    "karma-jasmine": "^0.2.0",
+    "karma-phantomjs-launcher": "^0.1.4"
+  }
+}
